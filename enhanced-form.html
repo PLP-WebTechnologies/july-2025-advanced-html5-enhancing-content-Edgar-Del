@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced HTML5 Content & Forms - Edgar Del</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #4a5568;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            color: #718096;
+            font-size: 1.2rem;
+        }
+
+        section {
+            background: rgba(255, 255, 255, 0.95);
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: #4a5568;
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.4rem;
+        }
+
+        /* Lists Styling */
+        .list-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        ul, ol {
+            background: #f7fafc;
+            padding: 1.5rem 2rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            padding-left: 0.5rem;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: #f7fafc;
+        }
+
+        tr:hover {
+            background: #edf2f7;
+        }
+
+        /* Media Styling */
+        .media-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .media-item {
+            background: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        video, audio {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        /* Form Styling */
+        .form-container {
+            background: #f7fafc;
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid #e2e8f0;
+        }
+
+        fieldset {
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            background: white;
+        }
+
+        legend {
+            font-weight: 600;
+            color: #4a5568;
+            padding: 0 1rem;
+            font-size: 1.2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        input:invalid {
+            border-color: #e53e3e;
+        }
+
+        input:valid {
+            border-color: #38a169;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .checkbox-group, .radio-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .checkbox-item, .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-item input, .radio-item input {
+            width: auto;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .required {
+            color: #e53e3e;
+        }
+
+        .help-text {
+            font-size: 0.9rem;
+            color: #718096;
+            margin-top: 0.25rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .checkbox-group, .radio-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <h1>Enhanced HTML5 Content & Forms</h1>
+            <p class="subtitle">Advanced HTML5 Elements and Form Mastery</p>
+            <p><strong>Student:</strong> Edgar Delfino Tchissingui | <strong>Date:</strong> August 2025</p>
+        </header>
+
+        <!-- Lists Section -->
+        <section>
+            <h2>Content Organization with Lists</h2>
+            
+            <div class="list-container">
+                <div>
+                    <h3>Unordered List - Web Development Technologies</h3>
+                    <ul>
+                        <li><strong>HTML5</strong> - Semantic markup and structure</li>
+                        <li><strong>CSS3</strong> - Styling and layout</li>
+                        <li><strong>JavaScript</strong> - Dynamic functionality</li>
+                        <li><strong>React</strong> - Component-based UI library</li>
+                        <li><strong>Node.js</strong> - Server-side JavaScript runtime</li>
+                        <li><strong>MongoDB</strong> - NoSQL database</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3>Ordered List - Learning Path</h3>
+                    <ol>
+                        <li>Master HTML5 fundamentals</li>
+                        <li>Learn CSS3 styling techniques</li>
+                        <li>Understand JavaScript basics</li>
+                        <li>Build responsive layouts</li>
+                        <li>Practice form validation</li>
+                        <li>Deploy your first website</li>
+                    </ol>
+                </div>
+
+                <div>
+                    <h3>Definition List - Key Concepts</h3>
+                    <dl>
+                        <dt><strong>Semantic HTML</strong></dt>
+                        <dd>HTML elements that clearly describe their meaning to both browser and developer</dd>
+                        
+                        <dt><strong>Accessibility</strong></dt>
+                        <dd>Designing content that can be used by people with disabilities</dd>
+                        
+                        <dt><strong>Responsive Design</strong></dt>
+                        <dd>Creating websites that work well on various screen sizes and devices</dd>
+                        
+                        <dt><strong>Form Validation</strong></dt>
+                        <dd>Ensuring data entered by users meets specified requirements</dd>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tables Section -->
+        <section>
+            <h2>Data Presentation with Tables</h2>
+            
+            <h3>Course Schedule</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Time</th>
+                        <th>Topic</th>
+                        <th>Instructor</th>
+                        <th>Duration</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Monday</td>
+                        <td>9:00 AM</td>
+                        <td>HTML5 Fundamentals</td>
+                        <td>Dr. Smith</td>
+                        <td>2 hours</td>
+                    </tr>
+                    <tr>
+                        <td>Tuesday</td>
+                        <td>10:30 AM</td>
+                        <td>CSS3 Styling</td>
+                        <td>Prof. Johnson</td>
+                        <td>1.5 hours</td>
+                    </tr>
+                    <tr>
+                        <td>Wednesday</td>
+                        <td>2:00 PM</td>
+                        <td>JavaScript Basics</td>
+                        <td>Ms. Davis</td>
+                        <td>2.5 hours</td>
+                    </tr>
+                    <tr>
+                        <td>Thursday</td>
+                        <td>11:00 AM</td>
+                        <td>Form Design & Validation</td>
+                        <td>Dr. Wilson</td>
+                        <td>2 hours</td>
+                    </tr>
+                    <tr>
+                        <td>Friday</td>
+                        <td>3:30 PM</td>
+                        <td>Project Workshop</td>
+                        <td>Team Lead</td>
+                        <td>3 hours</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Student Performance Metrics</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Name</th>
+                        <th>HTML5 Score</th>
+                        <th>CSS3 Score</th>
+                        <th>JavaScript Score</th>
+                        <th>Average</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>001</td>
+                        <td>Alice Johnson</td>
+                        <td>95%</td>
+                        <td>88%</td>
+                        <td>92%</td>
+                        <td>91.7%</td>
+                    </tr>
+                    <tr>
+                        <td>002</td>
+                        <td>Bob Smith</td>
+                        <td>87%</td>
+                        <td>91%</td>
+                        <td>85%</td>
+                        <td>87.7%</td>
+                    </tr>
+                    <tr>
+                        <td>003</td>
+                        <td>Carol Davis</td>
+                        <td>92%</td>
+                        <td>89%</td>
+                        <td>94%</td>
+                        <td>91.7%</td>
+                    </tr>
+                    <tr>
+                        <td>004</td>
+                        <td>David Wilson</td>
+                        <td>78%</td>
+                        <td>82%</td>
+                        <td>79%</td>
+                        <td>79.7%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Media Section -->
+        <section>
+            <h2>Rich Media Content</h2>
+            
+            <div class="media-container">
+                <div class="media-item">
+                    <h3>Image</h3>
+                    <img src="https://images.pexels.com/photos/693859/pexels-photo-693859.jpeg" 
+                         alt="simple image" 
+                         width="400" height="300">
+                </div>
+
+                <div class="media-item">
+                    <h3>Sample Video</h3>
+                    <video controls width="400" height="300" poster="https://images.pexels.com/photos/1591061/pexels-photo-1591061.jpeg">
+                        <source src="https://videos.pexels.com/video-files/11274341/11274341-uhd_2560_1440_25fps.mp4" type="video/mp4">
+                        <source src="#" type="video/webm">
+                        <track kind="subtitles" src="#" srclang="en" label="English">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p>Video element with multiple source formats and subtitles support.</p>
+                </div>
+
+                <div class="media-item">
+                    <h3>Sample Audio</h3>
+                    <audio controls>
+                        <source src="#" type="audio/mpeg">
+                        <source src="#" type="audio/ogg">
+                        Your browser does not support the audio tag.
+                    </audio>
+                    <p>Audio element demonstrating sound content embedding.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Form Section -->
+        <section>
+            <h2>Complete HTML5 Form with Validation</h2>
+            
+            <form class="form-container" action="#" method="POST" novalidate>
+                <!-- Personal Information -->
+                <fieldset>
+                    <legend>Personal Information</legend>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name <span class="required">*</span></label>
+                            <input type="text" 
+                                   id="firstName" 
+                                   name="firstName" 
+                                   required 
+                                   minlength="2" 
+                                   maxlength="50"
+                                   pattern="[A-Za-z\s]+"
+                                   placeholder="Enter your first name"
+                                   autocomplete="given-name">
+                            <div class="help-text">Must be 2-50 characters, letters only</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastName">Last Name <span class="required">*</span></label>
+                            <input type="text" 
+                                   id="lastName" 
+                                   name="lastName" 
+                                   required 
+                                   minlength="2" 
+                                   maxlength="50"
+                                   pattern="[A-Za-z\s]+"
+                                   placeholder="Enter your last name"
+                                   autocomplete="family-name">
+                            <div class="help-text">Must be 2-50 characters, letters only</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" 
+                               id="email" 
+                               name="email" 
+                               required 
+                               placeholder="your.email@example.com"
+                               autocomplete="email">
+                        <div class="help-text">Please enter a valid email address</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" 
+                               id="phone" 
+                               name="phone" 
+                               pattern="[\+]?[0-9\s\-\(\)]{10,}"
+                               placeholder="+1 (555) 123-4567"
+                               autocomplete="tel">
+                        <div class="help-text">Format: +1 (555) 123-4567 or 555-123-4567</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birthdate">Date of Birth</label>
+                        <input type="date" 
+                               id="birthdate" 
+                               name="birthdate"
+                               max="2005-12-31">
+                        <div class="help-text">Must be 18 or older</div>
+                    </div>
+                </fieldset>
+
+                <!-- Academic Information -->
+                <fieldset>
+                    <legend>Academic Information</legend>
+                    
+                    <div class="form-group">
+                        <label for="studentId">Student ID <span class="required">*</span></label>
+                        <input type="text" 
+                               id="studentId" 
+                               name="studentId" 
+                               required 
+                               pattern="[A-Z]{2}[0-9]{6}"
+                               placeholder="AB123456"
+                               readonly
+                               value="ED202500">
+                        <div class="help-text">Format: Two letters followed by six digits (auto-generated)</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="program">Program of Study <span class="required">*</span></label>
+                        <select id="program" name="program" required>
+                            <option value="">Select your program</option>
+                            <option value="web-dev">Web Development</option>
+                            <option value="data-science">Data Science</option>
+                            <option value="cybersecurity">Cybersecurity</option>
+                            <option value="ai-ml">Artificial Intelligence & Machine Learning</option>
+                            <option value="software-eng">Software Engineering</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="semester">Current Semester <span class="required">*</span></label>
+                        <select id="semester" name="semester" required>
+                            <option value="">Select semester</option>
+                            <option value="fall-2025">Fall 2025</option>
+                            <option value="spring-2026">Spring 2026</option>
+                            <option value="summer-2026">Summer 2026</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gpa">Current GPA</label>
+                        <input type="number" 
+                               id="gpa" 
+                               name="gpa" 
+                               min="0.0" 
+                               max="4.0" 
+                               step="0.01"
+                               placeholder="3.75">
+                        <div class="help-text">Enter GPA between 0.0 and 4.0</div>
+                    </div>
+                </fieldset>
+
+                <!-- Course Preferences -->
+                <fieldset>
+                    <legend>Course Preferences</legend>
+                    
+                    <div class="form-group">
+                        <label>Preferred Learning Format <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="online" name="learningFormat" value="online" required>
+                                <label for="online">Online</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="hybrid" name="learningFormat" value="hybrid">
+                                <label for="hybrid">Hybrid</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="in-person" name="learningFormat" value="in-person">
+                                <label for="in-person">In-Person</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Areas of Interest (Select all that apply)</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="frontend" name="interests" value="frontend">
+                                <label for="frontend">Frontend Development</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="backend" name="interests" value="backend">
+                                <label for="backend">Backend Development</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="mobile" name="interests" value="mobile">
+                                <label for="mobile">Mobile Development</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="ui-ux" name="interests" value="ui-ux">
+                                <label for="ui-ux">UI/UX Design</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="database" name="interests" value="database">
+                                <label for="database">Database Management</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="devops" name="interests" value="devops">
+                                <label for="devops">DevOps</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="experience">Programming Experience Level</label>
+                        <select id="experience" name="experience">
+                            <option value="">Select experience level</option>
+                            <option value="beginner">Beginner (0-1 years)</option>
+                            <option value="intermediate">Intermediate (1-3 years)</option>
+                            <option value="advanced">Advanced (3+ years)</option>
+                        </select>
+                    </div>
+                </fieldset>
+
+                <!-- Additional Information -->
+                <fieldset>
+                    <legend>Additional Information</legend>
+                    
+                    <div class="form-group">
+                        <label for="website">Personal Website/Portfolio</label>
+                        <input type="url" 
+                               id="website" 
+                               name="website" 
+                               placeholder="https://your-portfolio.com">
+                        <div class="help-text">Enter a valid URL (optional)</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="github">GitHub Profile</label>
+                        <input type="url" 
+                               id="github" 
+                               name="github" 
+                               placeholder="https://github.com/yourusername">
+                        <div class="help-text">Enter your GitHub profile URL (optional)</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="goals">Learning Goals <span class="required">*</span></label>
+                        <textarea id="goals" 
+                                  name="goals" 
+                                  required 
+                                  minlength="50" 
+                                  maxlength="500"
+                                  rows="4"
+                                  placeholder="Describe your learning goals and what you hope to achieve through this program..."></textarea>
+                        <div class="help-text">Minimum 50 characters, maximum 500 characters</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="availability">Weekly Study Hours</label>
+                        <input type="range" 
+                               id="availability" 
+                               name="availability" 
+                               min="5" 
+                               max="40" 
+                               value="15"
+                               step="5">
+                        <div class="help-text">5-40 hours per week (current: <span id="hours-display">15</span> hours)</div>
+                    </div>
+                </fieldset>
+
+                <!-- Submit Section -->
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button type="submit">Submit Application</button>
+                    <button type="reset" style="background: #718096; margin-left: 1rem;">Reset Form</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Footer -->
+        <footer style="text-align: center; color: white; margin-top: 2rem; padding: 1rem;">
+            <p>&copy; 2025 Edgar Tchissingui - Advanced HTML5 Assignment</p>
+        </footer>
+    </div>
+
+    <script>
+        // Simple JavaScript for range input display (not for validation)
+        document.getElementById('availability').addEventListener('input', function() {
+            document.getElementById('hours-display').textContent = this.value;
+        });
+    </script>
+</body>
+</html> 
